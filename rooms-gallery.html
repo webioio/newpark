@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rooms & Gallery — Hotel New Park</title>
+<meta name="description" content="Photos of the rooms and interiors at Hotel New Park, Boulevard, Dal Lake, Srinagar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Karla:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mist:#f1f4f1;
+    --ink:#152420;
+    --lake:#2f5d55;
+    --wood:#7c5a3a;
+    --brass:#a97c2f;
+    --line:rgba(21,36,32,0.14);
+    --white:#ffffff;
+    --mutedtext:#5b6b64;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--mist);
+    color:var(--ink);
+    font-family:'Karla',sans-serif;
+    font-weight:400;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3{font-family:'Spectral',serif;font-weight:400;letter-spacing:-0.01em;line-height:1.08;}
+  em{font-style:italic;color:var(--lake);}
+  ::selection{background:var(--lake);color:var(--white);}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);}
+
+  .waterline{width:100%;height:26px;overflow:hidden;line-height:0;}
+  .waterline svg{width:200%;height:26px;animation:ripple 12s linear infinite;}
+  @keyframes ripple{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(241,244,241,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:80px;}
+  .brandmark{display:flex;align-items:center;gap:12px;}
+  .brandmark img{height:32px;width:auto;}
+  .brandmark span{font-family:'Spectral',serif;font-size:19px;}
+  .navlinks{display:flex;align-items:center;gap:34px;}
+  .navlinks a{font-size:13.5px;color:var(--mutedtext);transition:color .2s;}
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks .btn{border:1px solid var(--ink);color:var(--ink);padding:9px 20px;border-radius:2px;font-size:12.5px;}
+  .navlinks .btn:hover{background:var(--ink);color:var(--white);}
+  .navtoggle{display:none;}
+
+  /* ===== PAGE HEAD ===== */
+  .pagehead{padding:70px 0 50px;}
+  .back{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mutedtext);display:inline-flex;align-items:center;gap:8px;margin-bottom:26px;transition:color .2s;}
+  .back:hover{color:var(--lake);}
+  .pagehead h1{font-size:clamp(38px,6vw,72px);margin:14px 0 14px;}
+  .pagehead p{color:var(--mutedtext);font-size:15.5px;max-width:56ch;}
+
+  /* ===== FILTER ===== */
+  .filters{display:flex;gap:9px;flex-wrap:wrap;margin:36px 0 50px;}
+  .filter{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.04em;color:var(--mutedtext);border:1px solid var(--line);padding:9px 16px;border-radius:20px;cursor:pointer;background:transparent;transition:all .2s;}
+  .filter:hover{color:var(--ink);border-color:var(--ink);}
+  .filter.active{background:var(--ink);color:var(--white);border-color:var(--ink);}
+
+  /* ===== GALLERY GRID ===== */
+  .gwrap{padding:0 0 110px;}
+  .g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;grid-auto-flow:dense;}
+  .g-item{
+    position:relative;overflow:hidden;cursor:pointer;background:var(--ink);
+    border-radius:2px;
+    opacity:0;transform:translateY(24px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .g-item.in{opacity:1;transform:translateY(0);}
+  .g-item.hide{display:none;}
+  .g-item.wide{grid-column:span 2;}
+  .g-item.tall{grid-row:span 2;}
+  .g-item .ph{width:100%;height:100%;aspect-ratio:1/1;overflow:hidden;}
+  .g-item.wide .ph{aspect-ratio:16/10;}
+  .g-item.tall .ph{aspect-ratio:3/4;}
+  .g-item img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1), filter .5s;display:block;}
+  .g-item:hover img{transform:scale(1.08);filter:saturate(1.08);}
+  .g-cap{
+    position:absolute;left:0;right:0;bottom:0;padding:20px 22px;
+    background:linear-gradient(0deg, rgba(21,36,32,0.85), rgba(21,36,32,0));
+    color:var(--white);
+    transform:translateY(100%);
+    transition:transform .4s cubic-bezier(.2,.7,.2,1);
+  }
+  .g-item:hover .g-cap{transform:translateY(0);}
+  .g-cap .tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);display:block;margin-bottom:4px;}
+  .g-cap .title{font-family:'Spectral',serif;font-size:19px;}
+  .g-corner{
+    position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;
+    background:rgba(255,255,255,0.16);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;color:var(--white);font-size:14px;
+    opacity:0;transform:scale(0.7);transition:opacity .3s, transform .3s;
+  }
+  .g-item:hover .g-corner{opacity:1;transform:scale(1);}
+
+  /* ===== LIGHTBOX ===== */
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(15,22,19,0.94);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .35s ease;
+    padding:40px;
+  }
+  .lightbox.open{opacity:1;pointer-events:auto;}
+  .lightbox-inner{max-width:1100px;max-height:82vh;width:100%;text-align:center;}
+  .lightbox img{max-width:100%;max-height:70vh;margin:0 auto;border-radius:2px;box-shadow:0 30px 80px rgba(0,0,0,0.5);
+    opacity:0;transform:scale(0.97);transition:opacity .3s ease, transform .3s ease;}
+  .lightbox.open img{opacity:1;transform:scale(1);}
+  .lightbox-cap{color:var(--mist);margin-top:18px;font-family:'Spectral',serif;font-size:19px;font-style:italic;}
+  .lightbox-tag{color:var(--brass);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;margin-top:8px;}
+  .lb-close, .lb-prev, .lb-next{
+    position:absolute;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:var(--white);
+    width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;
+    font-size:18px;transition:background .2s;
+  }
+  .lb-close:hover, .lb-prev:hover, .lb-next:hover{background:rgba(255,255,255,0.18);}
+  .lb-close{top:28px;right:28px;}
+  .lb-prev{left:28px;top:50%;transform:translateY(-50%);}
+  .lb-next{right:28px;top:50%;transform:translateY(-50%);}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  footer .fmark{display:flex;align-items:center;gap:10px;}
+  footer .fmark img{height:22px;width:auto;}
+  footer small{color:var(--mutedtext);font-size:12px;}
+  footer .flinks{display:flex;gap:20px;}
+  footer .flinks a{color:var(--mutedtext);font-size:12.5px;}
+  footer .flinks a:hover{color:var(--lake);}
+
+  @media (max-width:860px){
+    .navlinks{position:fixed;top:80px;left:0;right:0;background:var(--mist);flex-direction:column;align-items:flex-start;padding:20px 32px;border-bottom:1px solid var(--line);gap:18px;transform:translateY(-140%);transition:transform .3s;}
+    .navlinks.open{transform:translateY(0);}
+    .navtoggle{display:block;background:transparent;border:1px solid var(--line);color:var(--ink);width:38px;height:38px;font-size:16px;}
+    .g-grid{grid-template-columns:repeat(2,1fr);}
+    .g-item.wide{grid-column:span 2;}
+    .lb-prev{left:10px;}
+    .lb-next{right:10px;}
+    .lb-close{top:14px;right:14px;}
+  }
+  @media (max-width:520px){
+    .g-grid{grid-template-columns:1fr;}
+    .g-item.wide,.g-item.tall{grid-column:span 1;grid-row:span 1;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="hotelnewpark.html" class="brandmark">
+      <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=200,fit=crop/A3QE2O482MurPQjo/logo-5-mjELb7ENBqio9GEl.png" alt="Hotel New Park logo">
+      <span>Hotel New Park</span>
+    </a>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    <div class="navlinks" id="navLinks">
+      <a href="hotelnewpark.html#about">About</a>
+      <a href="hotelnewpark.html#rooms">Rooms</a>
+      <a href="hotelnewpark.html#tariff">Tariff</a>
+      <a href="rooms-gallery.html" class="active-page">Gallery</a>
+      <a class="btn" href="hotelnewpark.html#visit">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="pagehead wrap">
+  <a href="hotelnewpark.html" class="back">&#8592; Back to Hotel New Park</a>
+  <p class="eyebrow">Rooms &amp; Interiors</p>
+  <h1>The rooms, in <em>detail</em></h1>
+  <p>A closer look at the Deluxe and Suite rooms, the restaurant, and the corners of the hotel guests remember. Click any photo to view it larger.</p>
+
+  <div class="filters" id="filters">
+    <button class="filter active" data-f="all">All</button>
+    <button class="filter" data-f="deluxe">Deluxe Rooms</button>
+    <button class="filter" data-f="suite">Suite Rooms</button>
+    <button class="filter" data-f="interiors">Interiors</button>
+    <button class="filter" data-f="exterior">Exterior</button>
+  </div>
+</section>
+
+<section class="gwrap wrap">
+  <div class="g-grid" id="grid">
+
+    <div class="g-item wide tall" data-cat="suite">
+      <div class="ph"><img src="twin-bedroom.jpg" alt="Suite Room with twin beds"></div>
+      <span class="g-corner">&#8599;</span>
+      <div class="g-cap"><span class="tag">Suite Room</span><span class="title">Twin beds, wood-panelled walls</span></div>
+    </div>
+
+    <div class="g-item" data-cat="deluxe">
+      <div class="ph"><img src="single-bedroom.jpg" alt="Deluxe Room"></div>
+      <span class="g-corner">&#8599;</span>
+      <div class="g-cap"><span class="tag">Deluxe Room</span><span class="title">Bedding &amp; furnishings</span></div>
+    </div>
+
+    <div class="g-item" data-cat="interiors">
+      <div class="ph"><img src="bathroom.jpg" alt="Bathroom"></div>
+      <span class="g-corner">&#8599;</span>
+      <div class="g-cap"><span class="tag">Interiors</span><span class="title">En-suite bathroom</span></div>
+    </div>
+
+    <div class="g-item tall" data-cat="interiors">
+      <div class="ph"><img src="dining.jpg" alt="Restaurant dining area"></div>
+      <span class="g-corner">&#8599;</span>
+      <div class="g-cap"><span class="tag">Interiors</span><span class="title">Restaurant, set for dinner</span></div>
+    </div>
+
+    <div class="g-item" data-cat="interiors">
+      <div class="ph"><img src="reception.jpg" alt="Reception and lobby"></div>
+      <span class="g-corner">&#8599;</span>
+      <div class="g-cap"><span class="tag">Interiors</span><span class="title">Reception &amp; lobby</span></div>
+    </div>
+
+    <div class="g-item wide" data-cat="interiors">
+      <div class="ph"><img src="lounge.jpg" alt="Lounge seating area"></div>
+      <span class="g-corner">&#8599;</span>
+      <div class="g-cap"><span class="tag">Interiors</span><span class="title">Lounge</span></div>
+    </div>
+
+    <div class="g-item wide tall" data-cat="exterior">
+      <div class="ph"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1200,h=900,fit=crop/A3QE2O482MurPQjo/front-pJJ2MBeWdllPp8Dp.png" alt="Hotel New Park exterior"></div>
+      <span class="g-corner">&#8599;</span>
+      <div class="g-cap"><span class="tag">Exterior</span><span class="title">The front, Boulevard road</span></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">&#10005;</button>
+  <button class="lb-prev" id="lbPrev">&#8592;</button>
+  <div class="lightbox-inner">
+    <img id="lbImg" src="" alt="">
+    <p class="lightbox-tag" id="lbTag"></p>
+    <p class="lightbox-cap" id="lbCap"></p>
+  </div>
+  <button class="lb-next" id="lbNext">&#8594;</button>
+</div>
+
+<footer class="wrap">
+  <div class="fmark">
+    <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=200,fit=crop/A3QE2O482MurPQjo/logo-5-mjELb7ENBqio9GEl.png" alt="Hotel New Park">
+    <small>&#169; Hotel New Park &#8226; Boulevard, Dal Lake, Srinagar &#8226; Est. 1916</small>
+  </div>
+  <div class="flinks">
+    <a href="hotelnewpark.html#rooms">Rooms</a>
+    <a href="tel:+911942500926">Call</a>
+    <a href="mailto:parkkashmir@yahoo.co.in">Email</a>
+  </div>
+</footer>
+
+<script>
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
+  document.querySelectorAll('.navlinks a').forEach(function(a){
+    a.addEventListener('click', function(){ links.classList.remove('open'); });
+  });
+
+  /* reveal on scroll */
+  var items = Array.from(document.querySelectorAll('.g-item'));
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:0.08});
+  items.forEach(function(el){ io.observe(el); });
+
+  /* filters */
+  var filters = Array.from(document.querySelectorAll('.filter'));
+  filters.forEach(function(f){
+    f.addEventListener('click', function(){
+      filters.forEach(function(x){ x.classList.remove('active'); });
+      f.classList.add('active');
+      var val = f.dataset.f;
+      items.forEach(function(it){
+        var show = (val === 'all' || it.dataset.cat === val);
+        it.classList.toggle('hide', !show);
+        if(show){ it.classList.remove('in'); requestAnimationFrame(function(){ io.observe(it); }); }
+      });
+    });
+  });
+
+  /* lightbox */
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var lbTag = document.getElementById('lbTag');
+  var current = 0;
+  function visibleItems(){ return items.filter(function(it){ return !it.classList.contains('hide'); }); }
+  function openLB(idx){
+    var vis = visibleItems();
+    current = idx;
+    var it = vis[current];
+    var img = it.querySelector('img');
+    lbImg.src = img.src.replace(/w=\d+,h=\d+/, 'w=1600,h=1200');
+    lbImg.alt = img.alt;
+    lbTag.textContent = it.querySelector('.tag').textContent;
+    lbCap.textContent = it.querySelector('.title').textContent;
+    lb.classList.add('open');
+  }
+  items.forEach(function(it){
+    it.addEventListener('click', function(){
+      var vis = visibleItems();
+      openLB(vis.indexOf(it));
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+  lb.addEventListener('click', function(e){ if(e.target === lb){ lb.classList.remove('open'); } });
+  document.getElementById('lbNext').addEventListener('click', function(){ var vis = visibleItems(); openLB((current + 1) % vis.length); });
+  document.getElementById('lbPrev').addEventListener('click', function(){ var vis = visibleItems(); openLB((current - 1 + vis.length) % vis.length); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') lb.classList.remove('open');
+    if(e.key === 'ArrowRight') document.getElementById('lbNext').click();
+    if(e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+  });
+</script>
+
+</body>
+</html>
