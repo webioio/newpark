@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel New Park — Boulevard, Dal Lake, Srinagar</title>
+<meta name="description" content="Hotel New Park. Established 1916. 88 rooms on the Boulevard, Dal Lake, Srinagar, Kashmir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Karla:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mist:#f1f4f1;
+    --ink:#152420;
+    --lake:#2f5d55;
+    --wood:#7c5a3a;
+    --brass:#a97c2f;
+    --line:rgba(21,36,32,0.14);
+    --white:#ffffff;
+    --mutedtext:#5b6b64;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--mist);
+    color:var(--ink);
+    font-family:'Karla',sans-serif;
+    font-weight:400;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3{font-family:'Spectral',serif;font-weight:400;letter-spacing:-0.01em;line-height:1.08;}
+  em{font-style:italic;color:var(--lake);}
+  ::selection{background:var(--lake);color:var(--white);}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);}
+
+  /* ===== WATERLINE DIVIDER ===== */
+  .waterline{width:100%;height:26px;overflow:hidden;line-height:0;}
+  .waterline svg{width:200%;height:26px;animation:ripple 12s linear infinite;}
+  @keyframes ripple{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ===== NAV ===== */
+  header{position:sticky;top:0;z-index:50;background:rgba(241,244,241,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:80px;}
+  .brandmark{display:flex;align-items:center;gap:12px;}
+  .brandmark img{height:32px;width:auto;}
+  .brandmark span{font-family:'Spectral',serif;font-size:19px;}
+  .navlinks{display:flex;align-items:center;gap:34px;}
+  .navlinks a{font-size:13.5px;color:var(--mutedtext);transition:color .2s;}
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks .btn{border:1px solid var(--ink);color:var(--ink);padding:9px 20px;border-radius:2px;font-size:12.5px;}
+  .navlinks .btn:hover{background:var(--ink);color:var(--white);}
+  .navtoggle{display:none;}
+
+  /* ===== HERO ===== */
+  .hero{position:relative;padding:150px 0 90px;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85) brightness(0.55);}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,32,0.35),rgba(21,36,32,0.75) 85%);}
+  .hero .wrap{position:relative;z-index:2;color:var(--white);}
+  .hero .eyebrow{color:var(--brass);}
+  .hero h1{font-size:clamp(46px,8vw,96px);color:var(--white);margin:18px 0 20px;}
+  .hero p.lead{font-size:16.5px;max-width:52ch;color:rgba(255,255,255,0.86);margin-bottom:38px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-solid{background:var(--brass);color:var(--ink);padding:14px 26px;font-size:13.5px;letter-spacing:0.02em;border-radius:2px;transition:background .2s;display:inline-block;font-weight:500;}
+  .btn-solid:hover{background:#c69447;}
+  .btn-outline{border:1px solid rgba(255,255,255,0.55);color:var(--white);padding:14px 26px;font-size:13.5px;border-radius:2px;transition:border-color .2s,background .2s;display:inline-block;}
+  .btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.08);}
+  .btn-outline-dark{border:1px solid var(--line);color:var(--ink);padding:14px 26px;font-size:13.5px;border-radius:2px;transition:border-color .2s;display:inline-block;}
+  .btn-outline-dark:hover{border-color:var(--ink);}
+
+  /* ===== ABOUT ===== */
+  .about{padding:100px 0;}
+  .about .grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+  .about h2{font-size:clamp(32px,4.5vw,50px);margin:16px 0 24px;max-width:14ch;}
+  .about p{color:var(--mutedtext);font-size:16px;max-width:52ch;margin-bottom:16px;}
+  .facts{display:flex;flex-direction:column;}
+  .fact{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-top:1px solid var(--line);font-size:14px;}
+  .fact:last-child{border-bottom:1px solid var(--line);}
+  .fact .k{color:var(--ink);white-space:nowrap;}
+  .fact .v{color:var(--mutedtext);text-align:right;}
+
+  /* ===== ROOMS ===== */
+  .rooms{padding:100px 0;background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .rooms-head{margin-bottom:50px;max-width:640px;}
+  .rooms-head h2{font-size:clamp(32px,4.5vw,50px);margin:16px 0 8px;}
+  .rooms-head p{color:var(--mutedtext);font-size:15px;}
+  .room-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+  .room-card{border:1px solid var(--line);overflow:hidden;transition:transform .3s, box-shadow .3s;}
+  .room-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(21,36,32,0.08);}
+  .room-card .img{height:260px;overflow:hidden;}
+  .room-card .img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .room-card:hover .img img{transform:scale(1.05);}
+  .room-card .body{padding:28px;}
+  .room-card h3{font-size:24px;margin-bottom:10px;}
+  .room-card p{color:var(--mutedtext);font-size:14px;}
+
+  /* ===== FACILITIES ===== */
+  .facilities{padding:100px 0;}
+  .facilities .grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:70px;}
+  .facilities h2{font-size:clamp(32px,4.5vw,50px);margin:16px 0;}
+  .flist{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;}
+  .fitem{display:flex;align-items:baseline;gap:10px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px;}
+  .fitem::before{content:"—";color:var(--brass);}
+
+  /* ===== TARIFF ===== */
+  .tariff{padding:100px 0;background:var(--ink);color:var(--mist);}
+  .tariff .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+  .tariff .eyebrow{color:var(--brass);}
+  .tariff h2{font-size:clamp(32px,4.5vw,50px);color:var(--white);margin:16px 0 20px;}
+  .tariff p{color:rgba(241,244,241,0.7);font-size:15px;max-width:46ch;margin-bottom:26px;}
+  .tcard{border:1px solid rgba(241,244,241,0.18);padding:8px 30px;}
+  .trow{display:flex;justify-content:space-between;padding:20px 0;border-top:1px solid rgba(241,244,241,0.14);font-size:15px;}
+  .trow:last-child{border-bottom:1px solid rgba(241,244,241,0.14);}
+  .trow .price{font-family:'JetBrains Mono',monospace;color:var(--brass);}
+  .tnote{font-size:12.5px;color:rgba(241,244,241,0.55);margin-top:16px;}
+
+  /* ===== GALLERY ===== */
+  .gallery{padding:100px 0;}
+  .gallery-head{margin-bottom:44px;}
+  .gallery-head h2{font-size:clamp(32px,4.5vw,50px);margin:16px 0 0;}
+  .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:230px;gap:14px;}
+  .gal-grid a{overflow:hidden;position:relative;}
+  .gal-grid img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .gal-grid a:hover img{transform:scale(1.06);}
+  .gal-grid a:nth-child(1){grid-column:span 2;grid-row:span 2;}
+
+  /* ===== VISIT ===== */
+  .visit{padding:100px 0;border-top:1px solid var(--line);}
+  .visit .grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .visit h2{font-size:clamp(32px,4.5vw,50px);margin-bottom:28px;}
+  .info-row{display:flex;gap:16px;padding:18px 0;border-top:1px solid var(--line);}
+  .info-row:last-child{border-bottom:1px solid var(--line);}
+  .info-row .label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mutedtext);min-width:100px;}
+  .info-row .value{font-size:14.5px;}
+  .info-row .value a{border-bottom:1px solid var(--line);}
+  .info-row .value a:hover{border-color:var(--lake);color:var(--lake);}
+  .mapbox{border:1px solid var(--line);overflow:hidden;height:100%;min-height:380px;}
+  .mapbox iframe{width:100%;height:100%;min-height:380px;border:0;filter:grayscale(0.35) contrast(0.96);}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  footer .fmark{display:flex;align-items:center;gap:10px;}
+  footer .fmark img{height:22px;width:auto;}
+  footer small{color:var(--mutedtext);font-size:12px;}
+  footer .flinks{display:flex;gap:20px;}
+  footer .flinks a{color:var(--mutedtext);font-size:12.5px;}
+  footer .flinks a:hover{color:var(--lake);}
+
+  @media (max-width:860px){
+    .navlinks{position:fixed;top:80px;left:0;right:0;background:var(--mist);flex-direction:column;align-items:flex-start;padding:20px 32px;border-bottom:1px solid var(--line);gap:18px;transform:translateY(-140%);transition:transform .3s;}
+    .navlinks.open{transform:translateY(0);}
+    .navtoggle{display:block;background:transparent;border:1px solid var(--line);color:var(--ink);width:38px;height:38px;font-size:16px;}
+    .about .grid,.facilities .grid,.tariff .grid,.visit .grid{grid-template-columns:1fr;gap:36px;}
+    .room-grid{grid-template-columns:1fr;}
+    .flist{grid-template-columns:1fr;}
+    .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px;}
+    .gal-grid a:nth-child(1){grid-column:span 2;grid-row:span 1;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="brandmark">
+      <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=200,fit=crop/A3QE2O482MurPQjo/logo-5-mjELb7ENBqio9GEl.png" alt="Hotel New Park logo">
+      <span>Hotel New Park</span>
+    </a>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    <div class="navlinks" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#rooms">Rooms</a>
+      <a href="#facilities">Facilities</a>
+      <a href="#tariff">Tariff</a>
+      <a href="rooms-gallery.html">Gallery</a>
+      <a class="btn" href="#visit">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/A3QE2O482MurPQjo/front-pJJ2MBeWdllPp8Dp.png" alt="Hotel New Park exterior">
+  </div>
+  <div class="wrap">
+    <p class="eyebrow">Established 1916 &#8226; Boulevard, Dal Lake</p>
+    <h1>Hotel New<br>Park</h1>
+    <p class="lead">88 rooms on the shore of Dal Lake, Srinagar — a short walk from the water, minutes from the old city, and the quiet start to the rest of Kashmir.</p>
+    <div class="cta-row">
+      <a class="btn-solid" href="tel:+911942500926">Call to book</a>
+      <a class="btn-outline" href="#rooms">View rooms</a>
+    </div>
+  </div>
+</section>
+
+<div class="waterline">
+  <svg viewBox="0 0 800 26" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 13 Q 25 3, 50 13 T 100 13 T 150 13 T 200 13 T 250 13 T 300 13 T 350 13 T 400 13 T 450 13 T 500 13 T 550 13 T 600 13 T 650 13 T 700 13 T 750 13 T 800 13" stroke="#2f5d55" stroke-width="1.3" fill="none" opacity="0.45"/>
+  </svg>
+</div>
+
+<section class="about reveal" id="about">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">Since 1916</p>
+      <h2>A quiet address on the <em>Boulevard</em></h2>
+      <p>Hotel New Park sits on Srinagar's Boulevard road, on the edge of Dal Lake, in the heart of a city built around water. Eighty-eight rooms, a multi-cuisine restaurant, and a welcome that hasn't changed much since the hotel's earlier decades.</p>
+      <p>Eleven kilometres from Srinagar airport and walking distance to the lake, Lal Chowk, and the Mughal Gardens — with Gulmarg, Pahalgam and Sonmarg all within about two hours by road.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><span class="k">Location</span><span class="v">Boulevard, Dal Lake, Srinagar 190001</span></div>
+      <div class="fact"><span class="k">Airport</span><span class="v">11 km &#8226; Srinagar International</span></div>
+      <div class="fact"><span class="k">Nearby</span><span class="v">Lal Chowk, Mughal Gardens, Nehru Park, Royal Springs Golf Course</span></div>
+      <div class="fact"><span class="k">Day trips</span><span class="v">Gulmarg, Pahalgam, Sonmarg — approx. 2 hrs</span></div>
+      <div class="fact"><span class="k">Dining</span><span class="v">Multi-cuisine restaurant on site</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="rooms reveal" id="rooms">
+  <div class="wrap">
+    <div class="rooms-head">
+      <p class="eyebrow">Accommodation</p>
+      <h2>Deluxe &amp; Suite rooms</h2>
+      <p>Two room categories, both looking out over the Boulevard and the lake beyond it. <a href="rooms-gallery.html" style="border-bottom:1px solid var(--line);">See all room photos &#8594;</a></p>
+    </div>
+    <div class="room-grid">
+      <div class="room-card">
+        <div class="img"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=900,h=600,fit=crop/A3QE2O482MurPQjo/screenshot_20260413_150740_makemytrip---copy---copy-h64EIdzoUFSvWbmA.jpg" alt="Deluxe Room"></div>
+        <div class="body">
+          <h3>Deluxe Rooms</h3>
+          <p>Spacious and stylish, with cosy bedding and modern amenities — a comfortable base whether you're travelling for work or leisure.</p>
+        </div>
+      </div>
+      <div class="room-card">
+        <div class="img"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=900,h=600,fit=crop/A3QE2O482MurPQjo/screenshot_20260413_150931_makemytrip-tBJPomapIdfqZGUj.jpg" alt="Suite Room"></div>
+        <div class="body">
+          <h3>Suite Rooms</h3>
+          <p>Greater space and privacy, with plush bedding, upgraded amenities, and a separate area for work — a quieter, more private stay.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="facilities reveal" id="facilities">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">On site</p>
+      <h2>Facilities</h2>
+    </div>
+    <div class="flist">
+      <div class="fitem">Well furnished rooms</div>
+      <div class="fitem">Laundry facilities (charged)</div>
+      <div class="fitem">Cable TV, multichannel</div>
+      <div class="fitem">24-hour power backup</div>
+      <div class="fitem">Safe deposit</div>
+      <div class="fitem">Amarnath Yatra arrangements</div>
+      <div class="fitem">Valet parking</div>
+      <div class="fitem">Multi-cuisine restaurant</div>
+      <div class="fitem">EPABX</div>
+      <div class="fitem">Courtesy transport to and from market</div>
+    </div>
+  </div>
+</section>
+
+<section class="tariff reveal" id="tariff">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">Tariff</p>
+      <h2>Meal plan pricing</h2>
+      <p>Room rates are quoted on request and vary by season — call or write in and we'll confirm current rates and availability.</p>
+      <div class="cta-row">
+        <a class="btn-solid" href="tel:+911942500926">Call for room rates</a>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="trow"><span>Breakfast, per person</span><span class="price">&#8377;350</span></div>
+      <div class="trow"><span>Lunch or dinner, per person</span><span class="price">&#8377;750</span></div>
+      <p class="tnote">GST as applicable. Group tariff available on request.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery reveal" id="gallery">
+  <div class="wrap">
+    <div class="gallery-head">
+      <p class="eyebrow">Gallery</p>
+      <h2>Around the hotel</h2>
+    </div>
+    <div class="gal-grid">
+      <a href="rooms-gallery.html"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=900,h=900,fit=crop/A3QE2O482MurPQjo/screenshot_20260413_151714_makemytrip-h2kAsKL6tQYlI8TQ.jpg" alt="Hotel New Park gallery"></a>
+      <a href="rooms-gallery.html"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=600,h=460,fit=crop/A3QE2O482MurPQjo/screenshot_20260413_151652_makemytrip-SOtU2uSaJpYX8S4R.jpg" alt="Hotel New Park gallery"></a>
+      <a href="rooms-gallery.html"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=600,h=460,fit=crop/A3QE2O482MurPQjo/screenshot_20260413_151606_makemytrip-XCExevBADH3HeIZv.jpg" alt="Hotel New Park gallery"></a>
+      <a href="rooms-gallery.html"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=600,h=460,fit=crop/A3QE2O482MurPQjo/screenshot_20260413_151541_makemytrip-89bKRxbxqEPjKq1T.jpg" alt="Hotel New Park gallery"></a>
+      <a href="rooms-gallery.html"><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=600,h=460,fit=crop/A3QE2O482MurPQjo/screenshot_20260413_140323_makemytrip-azC5bgEdTJoXL9sw.jpg" alt="Hotel New Park gallery"></a>
+    </div>
+    <p style="margin-top:24px;"><a href="rooms-gallery.html" class="eyebrow" style="border-bottom:1px solid var(--line);padding-bottom:2px;">View full gallery &#8594;</a></p>
+  </div>
+</section>
+
+<section class="visit reveal" id="visit">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow">Reservations</p>
+      <h2>Find us</h2>
+      <div class="info-row"><span class="label">Address</span><span class="value">Hotel New Park, Boulevard, Dal Lake, Srinagar 190001, Kashmir</span></div>
+      <div class="info-row"><span class="label">Phone</span><span class="value"><a href="tel:+911942500926">+91-194-2500926</a> &#8226; <a href="tel:+911942500988">2500988</a> &#8226; <a href="tel:+911942501042">2501042</a></span></div>
+      <div class="info-row"><span class="label">Mobile</span><span class="value"><a href="tel:+919419016869">+91 94190 16869</a></span></div>
+      <div class="info-row"><span class="label">Fax</span><span class="value">+91-194-2501097</span></div>
+      <div class="info-row"><span class="label">Email</span><span class="value"><a href="mailto:parkkashmir@yahoo.co.in">parkkashmir@yahoo.co.in</a></span></div>
+      <div class="cta-row" style="margin-top:30px;">
+        <a class="btn-outline-dark" href="https://maps.google.com/?q=Hotel+New+Park+Boulevard+Dal+Lake+Srinagar+190001" target="_blank" rel="noopener">Get directions</a>
+        <a class="btn-outline-dark" href="mailto:parkkashmir@yahoo.co.in">Email reservations</a>
+      </div>
+    </div>
+    <div class="mapbox">
+      <iframe src="https://maps.google.com/maps?q=Hotel%20New%20Park%20Boulevard%20Dal%20Lake%20Srinagar%20190001&t=&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to Hotel New Park"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="fmark">
+    <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=200,fit=crop/A3QE2O482MurPQjo/logo-5-mjELb7ENBqio9GEl.png" alt="Hotel New Park">
+    <small>&#169; Hotel New Park &#8226; Boulevard, Dal Lake, Srinagar &#8226; Est. 1916</small>
+  </div>
+  <div class="flinks">
+    <a href="#rooms">Rooms</a>
+    <a href="tel:+911942500926">Call</a>
+    <a href="mailto:parkkashmir@yahoo.co.in">Email</a>
+  </div>
+</footer>
+
+<script>
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
+  document.querySelectorAll('.navlinks a').forEach(function(a){
+    a.addEventListener('click', function(){ links.classList.remove('open'); });
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+
+</body>
+</html>
